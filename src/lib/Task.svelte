@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
 
   export let todo;
 
@@ -9,15 +10,21 @@
   let deleteBtnStyle =
     "absolute right-0 top-0 -mt-2 -mr-2 bg-red-300 rounded-full w-5 h-5 text-white text-sm text-center hover:bg-red-700";
 
-  const dispatch = createEventDispatcher();
   const deleteTaskDispatcher = (e) => {
     dispatch("deleteTaskDispatch", todo.id);
   };
+
+  let categorySrc =
+    todo.category === "friends"
+      ? "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-friends-relationship-flaticons-lineal-color-flat-icons-3.png"
+      : todo.category === "groceries"
+      ? "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-groceries-foodies-flaticons-lineal-color-flat-icons-2.png"
+      : "https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-studying-university-flaticons-flat-flat-icons-4.png";
 </script>
 
 <li class={listItemStyle}>
   <div id="image-container" class={imgContainerStyle}>
-    <img src={todo.image} alt={todo.category} />
+    <img src={categorySrc} alt={todo.category} />
   </div>
   <p>{todo.task}</p>
   <button on:click={deleteTaskDispatcher} class={deleteBtnStyle}>X</button>
