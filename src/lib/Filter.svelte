@@ -4,7 +4,7 @@
   // export let filterTasks
 
   const dispatch = createEventDispatcher();
-  const filterTasks = (e) => {
+  const filterTasksDispatcher = (e) => {
       dispatch('filterDispatch', e.target.value)
 
   }
@@ -12,7 +12,7 @@
 
 <label for="task-filter">Filter tasks</label>
 <select
-  on:change={filterTasks}
+  on:change={filterTasksDispatcher}
   name="task-filter"
   id="task-filter"
   class="my-5 mx-2 border rounded-md p-1"

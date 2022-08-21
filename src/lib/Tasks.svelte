@@ -29,7 +29,9 @@
     },
   ];
 
-  let filteredTasks = todos;
+  //   let filteredTasks = todos - the 'state' is unchanged after we mutate todos
+  //   We need $: before variable to mark the state(ment) as reactive
+  $: filteredTasks = todos;
 
   const filterTasks = (e) => {
     if (e.detail === "null") {
@@ -41,7 +43,13 @@
       return todo.completed === completed;
     });
   };
-  
+
+  const deleteTask = (e) => {
+    console.log(e.detail);
+    todos = todos.filter((todo) => {
+      return todo.id !== e.detail;
+    });
+  };
 </script>
 
 <div id="app-container" class="p-8">
@@ -50,7 +58,7 @@
   <div id="task-list__container" class="">
     {#each filteredTasks as todo, i}
       <ul id="task-list">
-        <Task {todo} />
+        <Task {todo} on:deleteTaskDispatch={deleteTask} />
       </ul>
     {:else}
       <p>Your list is empty</p>
