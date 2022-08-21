@@ -7,24 +7,18 @@
     {
       id: 1,
       category: "groceries",
-    //   image:
-    //     "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-groceries-foodies-flaticons-lineal-color-flat-icons-2.png",
       task: "Buy Bread",
       completed: true,
     },
     {
       id: 2,
       category: "studying",
-    //   image:
-    //     "https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-studying-university-flaticons-flat-flat-icons-4.png",
       task: "Study for exam",
       completed: false,
     },
     {
       id: 3,
       category: "friends",
-    //   image:
-    //     "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-friends-relationship-flaticons-lineal-color-flat-icons-3.png",
       task: "Meet John for coffee",
       completed: false,
     },
@@ -53,7 +47,7 @@
 
   const addTask = (e) => {
     console.log(todos.length);
-    todos = [...todos, { id: todos.length + 1, ...e.detail }];
+    todos = [{ id: todos.length + 1, ...e.detail }, ...todos];
 
     console.log({ todos, filteredTasks });
   };
