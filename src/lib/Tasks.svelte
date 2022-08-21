@@ -1,4 +1,5 @@
 <script>
+  import Filter from "./Filter.svelte";
   import Task from "./Task.svelte";
 
   let todos = [
@@ -31,30 +32,21 @@
   let filteredTasks = todos;
 
   const filterTasks = (e) => {
-    if (e.target.value === "null") {
+    if (e.detail === "null") {
       filteredTasks = todos;
       return;
     }
-    const completed = e.target.value === "true";
+    const completed = e.detail === "true";
     filteredTasks = todos.filter((todo) => {
       return todo.completed === completed;
     });
   };
+  
 </script>
 
 <div id="app-container" class="p-8">
   <h1 class="text-2xl text-center ">My Tasks</h1>
-  <label for="task-filter">Filter tasks</label>
-  <select
-    on:change={filterTasks}
-    name="task-filter"
-    id="task-filter"
-    class="my-5 mx-2 border rounded-md p-1"
-  >
-    <option value={null}>All</option>
-    <option value={true}>Completed</option>
-    <option value={false}>Pending</option>
-  </select>
+  <Filter on:filterDispatch={filterTasks} />
   <div id="task-list__container" class="">
     {#each filteredTasks as todo, i}
       <ul id="task-list">
