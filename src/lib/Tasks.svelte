@@ -51,6 +51,9 @@
 
     console.log({ todos, filteredTasks });
   };
+
+  console.log("Tasks");
+
 </script>
 
 <div id="app-container" class="p-8">

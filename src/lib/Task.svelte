@@ -14,12 +14,16 @@
     dispatch("deleteTaskDispatch", todo.id);
   };
 
-  let categorySrc =
+  $: categorySrc =
     todo.category === "friends"
       ? "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-friends-relationship-flaticons-lineal-color-flat-icons-3.png"
       : todo.category === "groceries"
       ? "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-groceries-foodies-flaticons-lineal-color-flat-icons-2.png"
-      : "https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-studying-university-flaticons-flat-flat-icons-4.png";
+      : todo.category === "studing"
+      ? "https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-studying-university-flaticons-flat-flat-icons-4.png"
+      : "https://img.icons8.com/doodle/48/000000/checklist--v1.png";
+
+  console.log("categorySrc", categorySrc);
 </script>
 
 <li class={listItemStyle}>
