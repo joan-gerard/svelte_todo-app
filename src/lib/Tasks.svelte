@@ -3,53 +3,50 @@
   import NewTask from "./NewTask.svelte";
   import Task from "./Task.svelte";
 
-  let todos = [
-    {
-      id: 1,
-      category: "groceries",
-      task: "Buy Bread",
-      completed: true,
-    },
-    {
-      id: 2,
-      category: "studying",
-      task: "Study for exam",
-      completed: false,
-    },
-    {
-      id: 3,
-      category: "friends",
-      task: "Meet John for coffee",
-      completed: false,
-    },
-  ];
+  import { todoStore } from "../store";
+
+  // let todos;
+  // todoStore.subscribe((value) => (todos = value));
 
   //   let filteredTasks = todos - the 'state' is unchanged after we mutate todos
   //   We need $: before variable to mark the state(ment) as reactive
-  $: filteredTasks = todos;
+
+  // the $ before the store variable is a short hand for the subscription
+  $: filteredTasks = $todoStore;
 
   const filterTasks = (e) => {
     if (e.detail === "null") {
-      filteredTasks = todos;
+      filteredTasks = $todoStore;
       return;
     }
     const completed = e.detail === "true";
-    filteredTasks = todos.filter((todo) => {
+    filteredTasks = $todoStore.filter((todo) => {
       return todo.completed === completed;
     });
   };
 
   const deleteTask = (e) => {
-    todos = todos.filter((todo) => {
-      return todo.id !== e.detail;
+    console.log(e);
+    $todoStore = $todoStore.filter((todo) => {
+      return todo.slug !== e.detail;
     });
   };
+  const slugify = (str) =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/[\s_-]+/g, "_")
+      .replace(/^-+|-+$/g, "");
+
 
   const addTask = (e) => {
-    console.log(todos.length);
-    todos = [{ id: todos.length + 1, ...e.detail }, ...todos];
+    console.log(e.detail);
+    const newSlug = slugify(e.detail.task);
+    console.log(newSlug);
+    $todoStore = [{ slug: newSlug, ...e.detail }, ...$todoStore];
 
-    console.log({ todos, filteredTasks });
+    console.log({ $todoStore, filteredTasks });
   };
 </script>
 

@@ -5,7 +5,7 @@
   export let todo;
 
   const deleteTaskDispatcher = (e) => {
-    dispatch("deleteTaskDispatch", todo.id);
+    dispatch("deleteTaskDispatch", todo.slug);
   };
 
   $: categorySrc =

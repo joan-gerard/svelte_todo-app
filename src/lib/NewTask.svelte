@@ -16,12 +16,13 @@
   $: submitBtnIsDisabled = !newTask.task;
 
   const handleAddTask = (e) => {
-    console.log(e);
+    console.log(e.detail);
     dispatch("addTaskDispatch", newTask);
     modalIsShowing = false;
     newTask = {
       category: "",
       task: "",
+      slug: "",
       completed: false,
     };
   };
