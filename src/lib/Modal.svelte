@@ -9,12 +9,15 @@
   function onSubmit() {
     dispatch("submit");
   }
+
+  export let show;
 </script>
 
 <div
   class="relative z-10"
   aria-labelledby="modal-title"
   role="dialog"
+  style:display={show ? "block" : "none"}
   aria-modal="true"
 >
   <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
