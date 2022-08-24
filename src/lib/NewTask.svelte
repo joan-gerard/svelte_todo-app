@@ -1,20 +1,19 @@
 <script>
-  import Modal from "./Modal.svelte";
-  import Task from "./Task.svelte";
   import { createEventDispatcher, onMount } from "svelte";
   const dispatch = createEventDispatcher();
+  
+  import Modal from "./Modal.svelte";
+  import Task from "./Task.svelte";
 
   let modalIsShowing = false;
-  let addTaskStyle =
-    "bg-blue-600 rounded-lg text-white py-1 px-2 opacity-75 hover:opacity-100";
 
   let newTask = {
     category: "",
     task: "",
-    completed: null,
+    completed: false,
   };
 
-  $: submitBtnIsDisabled = !newTask.task
+  $: submitBtnIsDisabled = !newTask.task;
 
   const handleAddTask = (e) => {
     console.log(e);
@@ -26,6 +25,9 @@
   //   const submitBtn = document.getElementById("submit-btn");
   //   console.log(submitBtn);
   // });
+
+  let addTaskStyle =
+    "bg-blue-600 rounded-lg text-white py-1 px-2 opacity-75 hover:opacity-100";
 </script>
 
 <button on:click={() => (modalIsShowing = true)} class={addTaskStyle}>

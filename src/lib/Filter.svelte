@@ -1,9 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
-
-  // export let filterTasks
-
   const dispatch = createEventDispatcher();
+
   const filterTasksDispatcher = (e) => {
     dispatch("filterDispatch", e.target.value);
   };

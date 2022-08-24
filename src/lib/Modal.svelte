@@ -2,6 +2,8 @@
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
 
+  export let show;
+
   function close() {
     dispatch("close");
   }
@@ -9,8 +11,6 @@
   function onSubmit() {
     dispatch("submit");
   }
-
-  export let show;
 </script>
 
 <div
