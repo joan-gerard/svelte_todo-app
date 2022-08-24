@@ -1,8 +1,6 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onDestroy, onMount } from "svelte";
   const dispatch = createEventDispatcher();
-
-  export let show;
 
   function close() {
     dispatch("close");
@@ -11,13 +9,20 @@
   function onSubmit() {
     dispatch("submit");
   }
+
+  onMount(() => {
+    console.log("mounting");
+  });
+  onDestroy(() => {
+    console.log("destroying");
+  });
+
 </script>
 
 <div
   class="relative z-10"
   aria-labelledby="modal-title"
   role="dialog"
-  style:display={show ? "block" : "none"}
   aria-modal="true"
 >
   <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
