@@ -2,8 +2,9 @@
   import Filter from "./Filter.svelte";
   import NewTask from "./NewTask.svelte";
   import Task from "./Task.svelte";
+  import { slugify } from "../utils";
 
-  import { todoStore } from "../store";
+  import { todoStore, deleteTask, addTask } from "../store";
 
   // let todos;
   // todoStore.subscribe((value) => (todos = value));
@@ -25,29 +26,6 @@
     });
   };
 
-  const deleteTask = (e) => {
-    console.log(e);
-    $todoStore = $todoStore.filter((todo) => {
-      return todo.slug !== e.detail;
-    });
-  };
-  const slugify = (str) =>
-    str
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/[\s_-]+/g, "_")
-      .replace(/^-+|-+$/g, "");
-
-
-  const addTask = (e) => {
-    console.log(e.detail);
-    const newSlug = slugify(e.detail.task);
-    console.log(newSlug);
-    $todoStore = [{ slug: newSlug, ...e.detail }, ...$todoStore];
-
-    console.log({ $todoStore, filteredTasks });
-  };
 </script>
 
 <div id="app-container" class="p-8">
