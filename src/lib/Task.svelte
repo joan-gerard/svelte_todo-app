@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
+  import { fade, fly, scale } from "svelte/transition";
 
   export let todo;
 
@@ -24,13 +25,13 @@
     "absolute right-0 top-0 -mt-2 -mr-2 bg-red-300 rounded-full w-5 h-5 text-white text-sm text-center hover:bg-red-700";
 </script>
 
-<li class={listItemStyle}>
+<div class={listItemStyle} transition:fly={{duration: 1000, x: 200}}>
   <div id="image-container" class={imgContainerStyle}>
     <img src={categorySrc} alt={todo.category} />
   </div>
   <p>{todo.task}</p>
   <button on:click={deleteTaskDispatcher} class={deleteBtnStyle}>X</button>
-</li>
+</div>
 
 <style>
   img {

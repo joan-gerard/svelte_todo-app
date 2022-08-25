@@ -2,8 +2,8 @@
   import Filter from "./Filter.svelte";
   import NewTask from "./NewTask.svelte";
   import Task from "./Task.svelte";
-  import { slugify } from "../utils";
-
+  import { flip } from "svelte/animate";
+  import { quintOut } from "svelte/easing";
   import { todoStore, deleteTask, addTask } from "../store";
 
   // let todos;
@@ -25,7 +25,6 @@
       return todo.completed === completed;
     });
   };
-
 </script>
 
 <div id="app-container" class="p-8">
@@ -35,10 +34,13 @@
     <NewTask on:addTaskDispatch={addTask} />
   </div>
   <div id="task-list__container" class="">
-    {#each filteredTasks as todo, i}
-      <ul id="task-list">
+    {#each filteredTasks as todo, i (todo.slug)}
+      <div
+        id="task-list"
+        animate:flip={{ delay: 250, duration: 1000, easing: quintOut }}
+      >
         <Task {todo} on:deleteTaskDispatch={deleteTask} />
-      </ul>
+      </div>
     {:else}
       <p>Your list is empty</p>
     {/each}
