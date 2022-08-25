@@ -25,7 +25,7 @@
     "absolute right-0 top-0 -mt-2 -mr-2 bg-red-300 rounded-full w-5 h-5 text-white text-sm text-center hover:bg-red-700";
 </script>
 
-<div class={listItemStyle} transition:fly={{duration: 1000, x: 200}}>
+<div class={listItemStyle}>
   <div id="image-container" class={imgContainerStyle}>
     <img src={categorySrc} alt={todo.category} />
   </div>
