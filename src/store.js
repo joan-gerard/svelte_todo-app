@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import { slugify } from "./utils";
+import { slugify } from "./utils/utils";
 
 export const todoStore = writable([
   {

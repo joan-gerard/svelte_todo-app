@@ -1,10 +1,15 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+
   import Filter from "./Filter.svelte";
   import NewTask from "./NewTask.svelte";
   import Task from "./Task.svelte";
   import { flip } from "svelte/animate";
   import { quintOut } from "svelte/easing";
   import { todoStore, deleteTask, addTask } from "../store";
+  import { categories } from "../utils/utils";
+  import { imgContainerStyle } from "../utils/tailwindClasses";
 
   // let todos;
   // todoStore.subscribe((value) => (todos = value));
@@ -25,6 +30,15 @@
       return todo.completed === completed;
     });
   };
+
+  const filterCategory = (e) => {
+    console.log(e.target.alt);
+
+    filteredTasks = $todoStore.filter((todo) => {
+      return todo.category === e.target.alt;
+    });
+  };
+
 </script>
 
 <div id="app-container" class="p-8">
@@ -32,6 +46,17 @@
   <div id="actions-container" class="flex justify-between py-2 ">
     <Filter on:filterDispatch={filterTasks} />
     <NewTask on:addTaskDispatch={addTask} />
+  </div>
+  <div class="flex justify-around my-4">
+    {#each categories as category}
+      <div class={imgContainerStyle} on:click={filterCategory}>
+        <img
+          src={category.url}
+          alt={category.category}
+          value={category.category}
+        />
+      </div>
+    {/each}
   </div>
   <div id="task-list__container" class="">
     {#each filteredTasks as todo, i (todo.slug)}
